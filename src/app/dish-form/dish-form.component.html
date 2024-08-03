@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()">
+  <label>Name</label>
+  <input name="name" placeholder="Name" [(ngModel)]="formData.name" /><br />
+  <label>Description</label>
+  <input name="description" placeholder="Description" [(ngModel)]="formData.description" /><br />
+  <label>Ingredients</label>
+  <div *ngFor="let ingredient of formData.ingredients; let i = index">
+    <input [(ngModel)]="formData.ingredients[i].name" placeholder="name" name="ingredient.name-{{i}}" />
+  </div><br />
+  <button type="submit">Submit</button>
+</form>

@@ -16,4 +16,8 @@ export const routes: Routes = [
     path: 'dishes/:id',
     component: DishComponent,
   },
+  {
+    path: 'dishes/:id/edit',
+    component: DishComponent,
+  },
 ];

@@ -7,3 +7,4 @@
 <ul>
   <li *ngFor="let ingredient of dish.ingredients">{{ingredient.name}}</li>
 </ul>
+<app-dish-form *ngIf="isEdit" [dish]="dish" (formSubmit)="formSubmit($event)"></app-dish-form>
