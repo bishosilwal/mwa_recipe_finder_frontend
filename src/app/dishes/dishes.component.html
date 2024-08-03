@@ -1,6 +1,8 @@
-<h3>All recipes</h3>
+<h1 class="text-3xl font-bold mb-5">All Recipes</h1>
 <ul>
-  <li *ngFor="let recipe of recipes">
-    <a routerLink="/dishes/{{recipe.id}}">{{recipe.name}}</a>
+  <li *ngFor="let recipe of recipes" class="mb-2">
+    <a routerLink="/dishes/{{recipe.id}}" class="link link-primary">{{recipe.name}}</a>&nbsp;&nbsp;
+    <button routerLink="/dishes/{{recipe.id}}/edit" class="btn btn-primary">Edit</button>
+    <button routerLink="/dishes/{{recipe.id}}/" class="btn btn-primary ml-5">Delete</button>
   </li>
 </ul>

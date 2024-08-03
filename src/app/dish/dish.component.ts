@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DishFormComponent } from '../dish-form/dish-form.component';
 import DishType from '../types/dishType';
 
 @Component({
   selector: 'app-dish',
   standalone: true,
-  imports: [CommonModule, DishFormComponent],
+  imports: [CommonModule, DishFormComponent, RouterLink],
   templateUrl: './dish.component.html',
   styleUrl: './dish.component.css',
 })

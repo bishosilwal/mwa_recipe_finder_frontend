@@ -1,10 +1,9 @@
-<h3>Recipe for the dish </h3>
-
+<h3 class="text-xl">Recipe for the dish </h3>
 <br>
-<label>Name: </label>{{dish.name}}<br />
-<label>Description: </label>{{dish.description}}<br />
-<label>Ingredients: </label><br />
-<ul>
+<label class="font-semibold">Name: </label>{{dish.name}}<br />
+<label class="font-semibold">Description: </label>{{dish.description}}<br />
+<label class="font-semibold">Ingredients: </label><br />
+<ul class="ml-5 list-disc">
   <li *ngFor="let ingredient of dish.ingredients">{{ingredient.name}}</li>
 </ul>
 <app-dish-form *ngIf="isEdit" [dish]="dish" (formSubmit)="formSubmit($event)"></app-dish-form>
