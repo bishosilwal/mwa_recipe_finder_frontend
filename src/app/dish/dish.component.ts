@@ -40,6 +40,7 @@ export class DishComponent implements OnInit {
   }
 
   formSubmit(formData: {}) {
+    this.isEdit = false;
     console.log(formData);
   }
 }
