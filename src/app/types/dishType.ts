@@ -1,8 +1,10 @@
 import IngredientType from './ingredient';
 
 type DishType = {
+  _id: string;
   name: string;
-  description: string;
+  category: string;
+  country: string;
   ingredients: IngredientType[];
 };
 

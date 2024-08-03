@@ -1,7 +1,8 @@
 <h3 class="text-xl">Recipe for the dish </h3>
 <br>
 <label class="font-semibold">Name: </label>{{dish.name}}<br />
-<label class="font-semibold">Description: </label>{{dish.description}}<br />
+<label class="font-semibold">Category: </label>{{dish.category}}<br />
+<label class="font-semibold">Country: </label>{{dish.country}}<br />
 <label class="font-semibold">Ingredients: </label><br />
 <ul class="ml-5 list-disc">
   <li *ngFor="let ingredient of dish.ingredients">{{ingredient.name}}</li>

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import DishType from '../types/dishType';
+import { DishService } from '../service/dish.service';
 
 @Component({
   selector: 'app-dishes',
@@ -10,16 +12,17 @@ import { RouterLink } from '@angular/router';
   styleUrl: './dishes.component.css',
 })
 export class DishesComponent implements OnInit {
-  recipes: any[] = [];
+  dishes: DishType[] = [] as DishType[];
+
+  constructor(private _dishService: DishService) {}
 
   ngOnInit(): void {
-    this.recipes = this.getRecipes();
+    this._dishService.getAll().subscribe((responseData) => {
+      this.dishes = responseData;
+    });
   }
 
-  getRecipes() {
-    return [
-      { id: '1', name: 'egg curdy' },
-      { id: '2', name: 'masala tea' },
-    ];
+  deleteDish(dish: DishType) {
+    console.log(dish);
   }
 }

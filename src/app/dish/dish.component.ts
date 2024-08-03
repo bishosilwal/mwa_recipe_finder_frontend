@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DishFormComponent } from '../dish-form/dish-form.component';
 import DishType from '../types/dishType';
+import { HttpClient } from '@angular/common/http';
+import { DishService } from '../service/dish.service';
 
 @Component({
   selector: 'app-dish',
@@ -16,27 +18,18 @@ export class DishComponent implements OnInit {
 
   isEdit: boolean = false;
 
-  constructor(private _route: ActivatedRoute) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _dishService: DishService
+  ) {}
 
   ngOnInit(): void {
     let id = this._route.snapshot.params['id'];
     this.isEdit =
       this._route.snapshot.routeConfig?.path?.split('/').at(-1) == 'edit';
-    this.dish = {
-      name: 'tea',
-      description: 'tea description',
-      ingredients: [
-        {
-          name: 'water',
-        },
-        {
-          name: 'sugar',
-        },
-        {
-          name: 'tea leaf',
-        },
-      ],
-    };
+    this._dishService.findById(id).subscribe((responseData) => {
+      this.dish = responseData;
+    });
   }
 
   formSubmit(formData: {}) {
