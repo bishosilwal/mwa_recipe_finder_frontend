@@ -5,15 +5,15 @@ import { DishComponent } from './dish/dish.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/recipes',
+    redirectTo: '/dishes',
     pathMatch: 'full',
   },
   {
-    path: 'recipes',
+    path: 'dishes',
     component: DishesComponent,
   },
   {
-    path: 'recipes/:id',
+    path: 'dishes/:id',
     component: DishComponent,
   },
 ];
