@@ -13,6 +13,7 @@ import { DishService } from '../service/dish.service';
 })
 export class DishesComponent implements OnInit {
   dishes: DishType[] = [] as DishType[];
+  message: string = '';
 
   constructor(private _dishService: DishService) {}
 
@@ -23,6 +24,9 @@ export class DishesComponent implements OnInit {
   }
 
   deleteDish(dish: DishType) {
-    console.log(dish);
+    this._dishService.delete(dish).subscribe((responseData: any) => {
+      this.message = responseData['message'];
+      this.dishes = this.dishes.filter((d) => d._id != dish._id);
+    });
   }
 }

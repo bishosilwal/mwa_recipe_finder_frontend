@@ -26,4 +26,8 @@ export class DishService {
   update(dish: DishType) {
     return this._http.put(baseUrl + 'dishes/' + dish._id, dish);
   }
+
+  delete(dish: DishType) {
+    return this._http.delete(baseUrl + 'dishes/' + dish._id);
+  }
 }
