@@ -8,3 +8,7 @@
     <button (click)="deleteDish(dish)" class="btn btn-primary ml-5">Delete</button>
   </li>
 </ul>
+<div class="flex justify-center">
+  <button *ngIf="isPreviousPageAvailable()" (click)="prevClicked()" class="mx-3 btn btn-secondary">Prev</button>
+  <button *ngIf="isNextPageAvailable()" (click)="nextClicked()" class="btn btn-secondary">Next</button>
+</div>

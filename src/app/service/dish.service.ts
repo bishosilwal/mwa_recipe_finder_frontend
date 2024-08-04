@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import DishType from '../types/dishType';
@@ -11,8 +11,14 @@ const baseUrl = 'http://localhost:3000/api/';
 export class DishService {
   constructor(private _http: HttpClient) {}
 
-  getAll(): Observable<DishType[]> {
-    return this._http.get<DishType[]>(baseUrl + 'dishes');
+  getAll(offset: number, count: number): Observable<DishType[]> {
+    let params = new HttpParams({
+      fromObject: {
+        offset: offset,
+        count: count,
+      },
+    });
+    return this._http.get<DishType[]>(baseUrl + 'dishes', { params: params });
   }
 
   findById(id: string): Observable<DishType> {

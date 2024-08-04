@@ -14,13 +14,25 @@ import { DishService } from '../service/dish.service';
 export class DishesComponent implements OnInit {
   dishes: DishType[] = [] as DishType[];
   message: string = '';
+  offset: number = 0;
+  count: number = 5;
+  totalCount: number = 0;
 
   constructor(private _dishService: DishService) {}
 
   ngOnInit(): void {
-    this._dishService.getAll().subscribe((responseData) => {
-      this.dishes = responseData;
-    });
+    this.fetchDishData();
+  }
+
+  fetchDishData() {
+    this._dishService
+      .getAll(this.offset, this.count)
+      .subscribe((responseData: any) => {
+        this.dishes = responseData['dishes'];
+        this.offset = responseData['offset'];
+        this.count = responseData['count'];
+        this.totalCount = responseData['totalCount'];
+      });
   }
 
   deleteDish(dish: DishType) {
@@ -28,5 +40,31 @@ export class DishesComponent implements OnInit {
       this.message = responseData['message'];
       this.dishes = this.dishes.filter((d) => d._id != dish._id);
     });
+  }
+
+  prevClicked() {
+    this.offset -= this.count;
+    this.fetchDishData();
+  }
+
+  nextClicked() {
+    this.offset += this.count;
+    this.fetchDishData();
+  }
+
+  getPageCount() {
+    return Math.ceil(this.totalCount / this.count);
+  }
+
+  getCurrentPage() {
+    return 1 + Math.floor(this.offset / this.count);
+  }
+
+  isPreviousPageAvailable() {
+    return this.getCurrentPage() > 1;
+  }
+
+  isNextPageAvailable() {
+    return this.getPageCount() > this.getCurrentPage();
   }
 }
