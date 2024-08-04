@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import DishType from '../types/dishType';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { DishService } from '../service/dish.service';
 
 @Component({
   selector: 'app-dish-form',
@@ -18,12 +20,36 @@ export class DishFormComponent implements OnInit {
   formSubmit = new EventEmitter();
 
   formData: DishType = {} as DishType;
+  isCreate: boolean = false;
+  responseMessage: string = '';
+
+  constructor(
+    private _route: ActivatedRoute,
+    private _dishService: DishService
+  ) {}
 
   ngOnInit(): void {
-    this.formData = structuredClone(this.dishInput);
+    this.isCreate = this._route.routeConfig?.path === 'dishes/create/form';
+    if (!this.isCreate) this.formData = structuredClone(this.dishInput);
+  }
+
+  addNewIngredient() {
+    if (!this.formData.ingredients) this.formData.ingredients = [];
+    this.formData.ingredients.push({
+      name: '',
+      amount: 0,
+      unit: '',
+    });
   }
 
   onSubmit() {
-    this.formSubmit.emit(this.formData);
+    if (this.isCreate) {
+      this._dishService.create(this.formData).subscribe((res: any) => {
+        this.responseMessage = res['message'];
+        this.formData = {} as DishType;
+      });
+    } else {
+      this.formSubmit.emit(this.formData);
+    }
   }
 }

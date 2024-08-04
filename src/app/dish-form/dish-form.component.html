@@ -1,14 +1,33 @@
 <form (ngSubmit)="onSubmit()" class="my-5">
-  <h3 class="text-2xl my-3">Edit Dish</h3>
-  <label>Name</label>
-  <input name="name" placeholder="Name" [(ngModel)]="formData.name" class="input input-bordered input-primary" /><br />
-  <label>Category</label>
-  <input name="category" placeholder="Category" [(ngModel)]="formData.category"
-    class="input input-bordered input-primary" /><br />
+  <h3 class="text-2xl my-3">
+    {{ isCreate ? "Create Dish" : "Edit Dish"}}
+  </h3>
+  <h5 *ngIf="!!responseMessage">{{responseMessage}}</h5>
+  <div class="my-3">
+    <label>Name: </label>
+    <input name="name" placeholder="Name" [(ngModel)]="formData.name" class="input input-bordered input-primary" /><br />
+  </div>
+  <div class="my-3">
+    <label>Category: </label>
+    <input name="category" placeholder="Category" [(ngModel)]="formData.category"
+      class="input input-bordered input-primary" /><br />
+  </div>
+
   <label>Ingredients</label>
   <div *ngFor="let ingredient of formData.ingredients; let i = index">
+    <label>Name</label>
     <input [(ngModel)]="formData.ingredients[i].name" placeholder="name" name="ingredient.name-{{i}}"
       class="input input-bordered input-primary mb-2" />
-  </div><br />
+    <label>Amount</label>
+    <input [(ngModel)]="formData.ingredients[i].amount" placeholder="amount" name="ingredient.amount-{{i}}"
+      class="input input-bordered input-primary mb-2" />
+    <label>Unit</label>
+    <input [(ngModel)]="formData.ingredients[i].unit" placeholder="unit" name="ingredient.unit-{{i}}"
+      class="input input-bordered input-primary mb-2" />
+    </div>
+    <div *ngIf="isCreate">
+      <button (click)="addNewIngredient()" class="btn btn-secondary" type="button">Add Ingredient</button>
+    </div>
+    <br />
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

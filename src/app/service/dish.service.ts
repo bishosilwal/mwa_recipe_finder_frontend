@@ -18,4 +18,8 @@ export class DishService {
   findById(id: string): Observable<DishType> {
     return this._http.get<DishType>(baseUrl + 'dishes/' + id);
   }
+
+  create(dish: DishType) {
+    return this._http.post(baseUrl + 'dishes', dish);
+  }
 }
