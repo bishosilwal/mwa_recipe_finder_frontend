@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'dishes/:id/edit',
-    component: DishComponent,
+    component: DishFormComponent,
   },
   {
     path: 'dishes/create/form',

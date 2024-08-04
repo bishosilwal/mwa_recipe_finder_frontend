@@ -22,4 +22,8 @@ export class DishService {
   create(dish: DishType) {
     return this._http.post(baseUrl + 'dishes', dish);
   }
+
+  update(dish: DishType) {
+    return this._http.put(baseUrl + 'dishes/' + dish._id, dish);
+  }
 }

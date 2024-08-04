@@ -12,6 +12,11 @@
     <input name="category" placeholder="Category" [(ngModel)]="formData.category"
       class="input input-bordered input-primary" /><br />
   </div>
+  <div class="my-3">
+    <label>Country: </label>
+    <input name="country" placeholder="Country" [(ngModel)]="formData.country"
+      class="input input-bordered input-primary" /><br />
+  </div>
 
   <label>Ingredients</label>
   <div *ngFor="let ingredient of formData.ingredients; let i = index">
@@ -25,7 +30,7 @@
     <input [(ngModel)]="formData.ingredients[i].unit" placeholder="unit" name="ingredient.unit-{{i}}"
       class="input input-bordered input-primary mb-2" />
     </div>
-    <div *ngIf="isCreate">
+    <div>
       <button (click)="addNewIngredient()" class="btn btn-secondary" type="button">Add Ingredient</button>
     </div>
     <br />
