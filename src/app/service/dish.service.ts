@@ -36,4 +36,13 @@ export class DishService {
   delete(dish: DishType) {
     return this._http.delete(baseUrl + 'dishes/' + dish._id);
   }
+
+  searchBy(searchStr: string) {
+    let searchParams = new HttpParams({
+      fromObject: {
+        search: searchStr,
+      },
+    });
+    return this._http.get(baseUrl + 'dishes/search', { params: searchParams });
+  }
 }

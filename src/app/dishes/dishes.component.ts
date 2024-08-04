@@ -17,6 +17,7 @@ export class DishesComponent implements OnInit {
   offset: number = 0;
   count: number = 5;
   totalCount: number = 0;
+  search: string = '';
 
   constructor(private _dishService: DishService) {}
 
@@ -39,6 +40,17 @@ export class DishesComponent implements OnInit {
     this._dishService.delete(dish).subscribe((responseData: any) => {
       this.message = responseData['message'];
       this.dishes = this.dishes.filter((d) => d._id != dish._id);
+    });
+  }
+
+  searchChange(event: any) {
+    this.search = event.target.value;
+  }
+
+  submitSearch() {
+    if (!this.search) return;
+    this._dishService.searchBy(this.search).subscribe((response: any) => {
+      this.dishes = response['dishes'];
     });
   }
 

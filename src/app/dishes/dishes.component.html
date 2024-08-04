@@ -1,7 +1,14 @@
 <h1 class="text-3xl font-bold mb-5">All Recipes</h1>
 <h5 *ngIf="!!message">{{message}}</h5>
-<button routerLink="/dishes/create/form" class="btn btn-primary">Create</button>
+<div class="flex flex-row w-full mb-8">
+  <div class="basis-1 w-1/2 flex mr-2">
+    <input (change)="searchChange($event)" value={{search}} placeholder="search" name="search"
+      class="input input-primary" />
+  </div>
+  <button (click)="submitSearch()" class="btn btn-primary">Search</button>
+</div>
 <ul>
+  <li *ngIf="dishes.length == 0">No Dish Found</li>
   <li *ngFor="let dish of dishes" class="mb-2">
     <a routerLink="/dishes/{{dish._id}}" class="link link-primary">{{dish.name}}</a>&nbsp;&nbsp;
     <button routerLink="/dishes/{{dish._id}}/edit" class="btn btn-primary">Edit</button>
