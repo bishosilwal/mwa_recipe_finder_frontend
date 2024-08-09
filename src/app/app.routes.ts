@@ -3,6 +3,8 @@ import { DishesComponent } from './dishes/dishes.component';
 import { DishComponent } from './dish/dish.component';
 import { DishFormComponent } from './dish-form/dish-form.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +27,14 @@ export const routes: Routes = [
   {
     path: 'dishes/create/form',
     component: DishFormComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
   },
   {
     path: '**',
