@@ -6,7 +6,8 @@
       </h2>
     </div>
     <form class="mt-8 space-y-6">
-      <p class="text-red-500">{{error}}</p>
+      <p *ngIf="!!error" class="text-red-500">{{error}}</p>
+      <p *ngIf="!!message" class="text-green-500">{{message}}</p>
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>

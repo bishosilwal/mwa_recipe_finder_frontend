@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
@@ -18,6 +19,7 @@ export class SignupComponent {
   };
 
   error: String = '';
+  message: String = '';
 
   constructor(private _userService: UserService) {}
 
@@ -27,8 +29,14 @@ export class SignupComponent {
       return;
     } else {
       this.error = '';
-      this._userService.signup(this.user).subscribe((data) => {
-        console.log(data);
+      this._userService.signup(this.user).subscribe((res) => {
+        this.message = res['message'];
+        this.user = {
+          fullName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        };
       });
     }
   }
