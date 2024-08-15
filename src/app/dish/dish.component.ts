@@ -5,7 +5,6 @@ import { DishFormComponent } from '../dish-form/dish-form.component';
 import DishType from '../types/dishType';
 import { DishService } from '../service/dish.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-dish',
   standalone: true,

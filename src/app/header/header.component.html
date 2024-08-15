@@ -1,7 +1,7 @@
 <nav class="h-16 bg-primary py-2 px-5 flex justify-between">
   <div>
     <button routerLink="/" class="btn btn-primary">Home</button>
-    <button routerLink="/dishes/create/form" class="btn btn-primary">Create</button>
+    <button *ngIf="isUserLoggedIn()" routerLink="/dishes/create/form" class="btn btn-primary">Create</button>
   </div>
   <div *ngIf="!isUserLoggedIn()">
     <button routerLink="/login" class="btn btn-primary">Login</button>

@@ -12,8 +12,8 @@
   <li *ngIf="dishes.length == 0">No Dish Found</li>
   <li *ngFor="let dish of dishes" class="mb-2">
     <a routerLink="/dishes/{{dish._id}}" class="link link-primary">{{dish.name}}</a>&nbsp;&nbsp;
-    <button routerLink="/dishes/{{dish._id}}/edit" class="btn btn-primary">Edit</button>
-    <button (click)="deleteDish(dish)" class="btn btn-primary ml-5">Delete</button>
+    <button *ngIf="isUserLoggedIn()" routerLink="/dishes/{{dish._id}}/edit" class="btn btn-primary">Edit</button>
+    <button *ngIf="isUserLoggedIn()" (click)="deleteDish(dish)" class="btn btn-primary ml-5">Delete</button>
   </li>
 </ul>
 <div class="flex justify-center">
