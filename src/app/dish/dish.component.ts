@@ -27,8 +27,8 @@ export class DishComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this._route.snapshot.params['id'];
-    this._dishService.findById(id).subscribe((responseData) => {
-      this.dish = responseData;
+    this._dishService.findById(id).subscribe((responseData: any) => {
+      this.dish = responseData['dish'];
     });
   }
 }

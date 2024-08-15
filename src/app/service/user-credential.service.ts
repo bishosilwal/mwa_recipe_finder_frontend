@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApiNotificationService } from './api-notification.service';
 
 export class UserToken {
   #token: string = '';
@@ -20,7 +21,7 @@ export class UserToken {
 export class UserCredentialService {
   userToken: UserToken = new UserToken();
 
-  constructor() {}
+  constructor(private _notificationService: ApiNotificationService) {}
 
   setToken(token: string) {
     this.userToken.token = token;
@@ -39,5 +40,10 @@ export class UserCredentialService {
 
   isLogin() {
     return !!this.getToken();
+  }
+
+  logout() {
+    this.setToken('');
+    this._notificationService.setMessage('Logout Successfully');
   }
 }

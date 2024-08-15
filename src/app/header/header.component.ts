@@ -18,10 +18,8 @@ export class HeaderComponent {
   ) {}
 
   logout() {
-    this._userCredentialService.setToken('');
-    this._router.navigate(['/dishes'], {
-      state: { message: 'Logged out successfully' },
-    });
+    this._userCredentialService.logout();
+    this._router.navigate(['/dishes']);
   }
 
   isUserLoggedIn() {

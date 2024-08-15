@@ -15,7 +15,6 @@ import { UserCredentialService } from '../service/user-credential.service';
 })
 export class DishesComponent implements OnInit {
   dishes: DishType[] = [] as DishType[];
-  message: string = '';
   offset: number = 0;
   count: number = 5;
   totalCount: number = 0;
@@ -26,10 +25,7 @@ export class DishesComponent implements OnInit {
     private _dishService: DishService,
     private _router: Router,
     private _userCredentialService: UserCredentialService
-  ) {
-    this.message =
-      this._router.getCurrentNavigation()?.extras?.state?.['message'];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.fetchDishData();
@@ -55,7 +51,6 @@ export class DishesComponent implements OnInit {
 
   deleteDish(dish: DishType) {
     this._dishService.delete(dish).subscribe((responseData: any) => {
-      this.message = responseData['message'];
       this.dishes = this.dishes.filter((d) => d._id != dish._id);
     });
   }

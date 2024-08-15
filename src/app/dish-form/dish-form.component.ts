@@ -19,7 +19,6 @@ export class DishFormComponent implements OnInit {
   formData: DishType = {} as DishType;
   isCreate: boolean = true;
   isEdit: boolean = false;
-  responseMessage: string = '';
 
   constructor(
     private _route: ActivatedRoute,
@@ -28,15 +27,13 @@ export class DishFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.responseMessage =
-      this._router.getCurrentNavigation()?.extras?.state?.['message'];
     this.isCreate = this._route.routeConfig?.path === 'dishes/create/form';
     this.isEdit = this._route.routeConfig?.path?.split('/').at(-1) == 'edit';
     if (this.isEdit) {
       this._route.params.subscribe((params) => {
         let id = params['id'];
-        this._dishService.findById(id).subscribe((data) => {
-          this.formData = data;
+        this._dishService.findById(id).subscribe((data: any) => {
+          this.formData = data['dish'];
         });
       });
     }
@@ -54,7 +51,6 @@ export class DishFormComponent implements OnInit {
   onSubmit() {
     if (this.isCreate) {
       this._dishService.create(this.formData).subscribe((res: any) => {
-        this.responseMessage = res['message'];
         this.formData = {} as DishType;
         this._router.navigate(['/dishes/', res['dish']['_id']], {
           state: { message: 'Dish created successfully' },
@@ -62,7 +58,6 @@ export class DishFormComponent implements OnInit {
       });
     } else {
       this._dishService.update(this.formData).subscribe((res: any) => {
-        this.responseMessage = res['message'];
         this.formData = res['dish'];
       });
     }

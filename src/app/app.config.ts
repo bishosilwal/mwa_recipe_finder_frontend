@@ -4,7 +4,7 @@ import { withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { httpRequestInterceptor } from './interceptor/http-request.interceptor';
-import { responseErrorHandlerInterceptor } from './interceptor/response-error-handler.interceptor';
+import { responseNotificationhandlerInterceptor } from './interceptor/response-notification-handler.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([
         httpRequestInterceptor,
-        responseErrorHandlerInterceptor,
+        responseNotificationhandlerInterceptor,
       ])
     ),
   ],

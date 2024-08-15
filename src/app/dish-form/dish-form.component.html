@@ -2,7 +2,6 @@
   <h3 class="text-2xl my-3">
     {{ isCreate ? "Create Dish" : "Edit Dish"}}
   </h3>
-  <h5 *ngIf="!!responseMessage">{{responseMessage}}</h5>
   <div class="my-3">
     <label>Name: </label>
     <input name="name" placeholder="Name" [(ngModel)]="formData.name" class="input input-bordered input-primary" /><br />

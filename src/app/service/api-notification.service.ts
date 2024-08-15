@@ -4,14 +4,27 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiErrorService {
+export class ApiNotificationService {
   #rawError: Object = {};
   #status: number | null = null;
   #error: String = '';
+  #message: String = '';
 
   errorChange: Subject<any> = new Subject<any>();
+  messageChange: Subject<any> = new Subject<any>();
 
   constructor() {}
+
+  setMessage(message: String) {
+    this.#message = message;
+    this.clearAllError();
+
+    this.messageChange.next(this);
+  }
+
+  getSuccessMessage() {
+    return this.#message;
+  }
 
   setRawError(error: any) {
     this.#rawError = error;
@@ -62,10 +75,24 @@ export class ApiErrorService {
     this.#rawError = {};
   }
 
-  clearAll() {
+  clearMessage() {
+    this.#message = '';
+  }
+
+  clearAllError() {
     this.clearError();
     this.clearStatus();
     this.clearRawError();
     this.errorChange.next(this);
+  }
+
+  clearAllMessage() {
+    this.clearMessage();
+    this.messageChange.next(this);
+  }
+
+  clearAll() {
+    this.clearAllError();
+    this.clearAllMessage();
   }
 }
