@@ -1,5 +1,6 @@
+<h5 *ngIf="!!message" class="text-green-500 my-5">{{message}}</h5>
+
 <h1 class="text-3xl font-bold mb-5">All Recipes</h1>
-<h5 *ngIf="!!message">{{message}}</h5>
 <div class="flex flex-row w-full mb-8">
   <div class="basis-1 w-1/2 flex mr-2">
     <input (change)="searchChange($event)" value={{search}} placeholder="search" name="search"

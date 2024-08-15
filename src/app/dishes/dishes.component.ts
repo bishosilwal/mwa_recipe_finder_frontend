@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import DishType from '../types/dishType';
 import { DishService } from '../service/dish.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dishes',
@@ -19,7 +20,10 @@ export class DishesComponent implements OnInit {
   totalCount: number = 0;
   search: string = '';
 
-  constructor(private _dishService: DishService) {}
+  constructor(private _dishService: DishService, private _router: Router) {
+    this.message =
+      this._router.getCurrentNavigation()?.extras?.state?.['message'];
+  }
 
   ngOnInit(): void {
     this.fetchDishData();

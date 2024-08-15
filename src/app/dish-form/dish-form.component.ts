@@ -28,6 +28,8 @@ export class DishFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.responseMessage =
+      this._router.getCurrentNavigation()?.extras?.state?.['message'];
     this.isCreate = this._route.routeConfig?.path === 'dishes/create/form';
     this.isEdit = this._route.routeConfig?.path?.split('/').at(-1) == 'edit';
     if (this.isEdit) {
