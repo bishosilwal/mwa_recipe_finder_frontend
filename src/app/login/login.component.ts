@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  error: String = '';
   message: String = '';
 
   constructor(
@@ -35,21 +34,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this._userService.login(this.user).subscribe(
-      (data) => {
-        this._userCredentialService.setToken(data['token']);
-        this.message = data['message'];
-        this.user = {
-          email: '',
-          password: '',
-        };
-        this._router.navigate(['/dishes'], {
-          state: { message: data['message'] },
-        });
-      },
-      (error) => {
-        this.error = error.error.message;
-      }
-    );
+    this._userService.login(this.user).subscribe((data) => {
+      this._userCredentialService.setToken(data['token']);
+      this.message = data['message'];
+      this.user = {
+        email: '',
+        password: '',
+      };
+      this._router.navigate(['/dishes'], {
+        state: { message: data['message'] },
+      });
+    });
   }
 }
