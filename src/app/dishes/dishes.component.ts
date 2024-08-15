@@ -20,6 +20,7 @@ export class DishesComponent implements OnInit {
   count: number = 5;
   totalCount: number = 0;
   search: string = '';
+  error: string = '';
 
   constructor(
     private _dishService: DishService,
@@ -39,14 +40,17 @@ export class DishesComponent implements OnInit {
   }
 
   fetchDishData() {
-    this._dishService
-      .getAll(this.offset, this.count)
-      .subscribe((responseData: any) => {
+    this._dishService.getAll(this.offset, this.count).subscribe(
+      (responseData: any) => {
         this.dishes = responseData['dishes'];
         this.offset = responseData['offset'];
         this.count = responseData['count'];
         this.totalCount = responseData['totalCount'];
-      });
+      },
+      (error) => {
+        this.error = error.error;
+      }
+    );
   }
 
   deleteDish(dish: DishType) {
